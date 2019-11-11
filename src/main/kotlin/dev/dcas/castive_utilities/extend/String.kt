@@ -62,7 +62,19 @@ fun String.url(): URL? = runCatching {
 fun String.base64(): String = Base64.getEncoder().encodeToString(this.toByteArray())
 
 /**
+ * Encode a String as Base64
+ * URL safe
+ */
+fun String.base64Url(): String = Base64.getUrlEncoder().encodeToString(this.toByteArray())
+
+/**
  * Convert a Base64 String into its original form
  * Not url safe
  */
 fun String.decodeBase64(): String = String(Base64.getDecoder().decode(this))
+
+/**
+ * Convert a Base64 String into its original form
+ * URL safe
+ */
+fun String.decodeBase64Url(): String = String(Base64.getUrlDecoder().decode(this))

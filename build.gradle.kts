@@ -23,7 +23,7 @@ plugins {
 }
 
 group = "dev.dcas"
-version = "1"
+version = "2"
 
 repositories {
     mavenCentral()
