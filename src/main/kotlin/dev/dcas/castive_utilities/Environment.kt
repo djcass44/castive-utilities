@@ -15,31 +15,17 @@
  *
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+package dev.dcas.castive_utilities
 
-plugins {
-    kotlin("jvm") version "1.3.50"
-	maven
-}
-
-group = "dev.dcas"
-version = "1"
-
-repositories {
-    mavenCentral()
-	jcenter()
-	maven(url = "https://jitpack.io")
-}
-
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-
-	implementation("com.google.code.gson:gson:2.8.5")
-	implementation("com.github.djcass44:log2:3.4")
-}
-
-tasks {
-	withType<KotlinCompile>().all {
-		kotlinOptions.jvmTarget = "11"
+object Environment {
+	/**
+	 * Load an environment variable or default if it cannot be found
+	 */
+	fun get(name: String, default: String = ""): String {
+		val value = System.getenv(name)
+		return if(value.isNullOrBlank())
+			default
+		else
+			value
 	}
 }

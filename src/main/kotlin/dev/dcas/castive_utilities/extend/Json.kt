@@ -15,31 +15,18 @@
  *
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+package dev.dcas.castive_utilities.extend
 
-plugins {
-    kotlin("jvm") version "1.3.50"
-	maven
-}
+import com.google.gson.GsonBuilder
 
-group = "dev.dcas"
-version = "1"
+private val gson = GsonBuilder().setPrettyPrinting().create()
 
-repositories {
-    mavenCentral()
-	jcenter()
-	maven(url = "https://jitpack.io")
-}
+/**
+ * Convert an arbitrary object into JSON
+ */
+fun Any.json(): String = gson.toJson(this)
 
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-
-	implementation("com.google.code.gson:gson:2.8.5")
-	implementation("com.github.djcass44:log2:3.4")
-}
-
-tasks {
-	withType<KotlinCompile>().all {
-		kotlinOptions.jvmTarget = "11"
-	}
-}
+/**
+ * Convert a JSON string into a Java class instance
+ */
+fun <T> String.parse(type: Class<T>): T = gson.fromJson(this, type)
