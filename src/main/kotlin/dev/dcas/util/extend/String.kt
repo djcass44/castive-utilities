@@ -15,9 +15,9 @@
  *
  */
 
-package dev.dcas.castive_utilities.extend
+package dev.dcas.util.extend
 
-import dev.dcas.castive_utilities.Environment
+import dev.dcas.util.Environment
 import java.net.URL
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -59,13 +59,17 @@ fun String.url(): URL? = runCatching {
  * Encode a String as Base64
  * Not url safe
  */
-fun String.base64(): String = Base64.getEncoder().encodeToString(this.toByteArray())
+fun String.base64(): String = this.toByteArray().base64()
+
+fun ByteArray.base64(): String = Base64.getEncoder().encodeToString(this)
 
 /**
  * Encode a String as Base64
  * URL safe
  */
-fun String.base64Url(): String = Base64.getUrlEncoder().encodeToString(this.toByteArray())
+fun String.base64Url(): String = this.toByteArray().base64Url()
+
+fun ByteArray.base64Url(): String = Base64.getUrlEncoder().encodeToString(this)
 
 /**
  * Convert a Base64 String into its original form

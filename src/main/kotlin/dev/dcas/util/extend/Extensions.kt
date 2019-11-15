@@ -15,32 +15,10 @@
  *
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+package dev.dcas.util.extend
 
-plugins {
-    kotlin("jvm") version "1.3.50"
-	maven
-}
-
-group = "dev.dcas"
-version = "3"
-
-repositories {
-    mavenCentral()
-	jcenter()
-	maven(url = "https://jitpack.io")
-}
-
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-
-	implementation("com.google.code.gson:gson:2.8.5")
-	implementation("com.github.djcass44:log2:3.4")
-}
-
-tasks {
-	withType<KotlinCompile>().all {
-		kotlinOptions.jvmTarget = "11"
-	}
-}
+/**
+ * Convert a pair into a Basic authentication digest
+ * This is assuming that First = username and Second = password
+ */
+fun Pair<Any, Any>.toBasic(): String = "Basic ${"$first:$second".base64Url()}"

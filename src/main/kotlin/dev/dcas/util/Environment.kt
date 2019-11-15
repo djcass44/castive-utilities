@@ -15,18 +15,17 @@
  *
  */
 
-package dev.dcas.castive_utilities.extend
+package dev.dcas.util
 
-import com.google.gson.GsonBuilder
-
-private val gson = GsonBuilder().setPrettyPrinting().create()
-
-/**
- * Convert an arbitrary object into JSON
- */
-fun Any.json(): String = gson.toJson(this)
-
-/**
- * Convert a JSON string into a Java class instance
- */
-fun <T> String.parse(type: Class<T>): T = gson.fromJson(this, type)
+object Environment {
+	/**
+	 * Load an environment variable or default if it cannot be found
+	 */
+	fun get(name: String, default: String = ""): String {
+		val value = System.getenv(name)
+		return if(value.isNullOrBlank())
+			default
+		else
+			value
+	}
+}

@@ -15,18 +15,20 @@
  *
  */
 
-package dev.dcas.castive_utilities.extend
+package dev.dcas.util.crypto
 
-import java.security.SecureRandom
-import java.util.*
+import dev.dcas.util.extend.base64Url
+import javax.crypto.KeyGenerator
 
-private val random = SecureRandom()
+object Crypto {
+	private val generator: KeyGenerator = KeyGenerator.getInstance("AES").apply {
+		init(256)
+	}
 
-/**
- * Generate a random String of (this) characters
- */
-fun Int.randomString(): String {
-	val token = ByteArray(this)
-	random.nextBytes(token)
-	return Base64.getUrlEncoder().withoutPadding().encodeToString(token)
+	/**
+	 * Get a random AES string
+	 * URL safe
+	 * Keysize is 256
+	 */
+	fun get(): String = generator.generateKey().encoded.base64Url()
 }

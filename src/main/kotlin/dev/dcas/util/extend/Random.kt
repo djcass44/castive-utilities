@@ -15,32 +15,18 @@
  *
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+package dev.dcas.util.extend
 
-plugins {
-    kotlin("jvm") version "1.3.50"
-	maven
-}
+import java.security.SecureRandom
+import java.util.*
 
-group = "dev.dcas"
-version = "3"
+private val random = SecureRandom()
 
-repositories {
-    mavenCentral()
-	jcenter()
-	maven(url = "https://jitpack.io")
-}
-
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-
-	implementation("com.google.code.gson:gson:2.8.5")
-	implementation("com.github.djcass44:log2:3.4")
-}
-
-tasks {
-	withType<KotlinCompile>().all {
-		kotlinOptions.jvmTarget = "11"
-	}
+/**
+ * Generate a random String of (this) characters
+ */
+fun Int.randomString(): String {
+	val token = ByteArray(this)
+	random.nextBytes(token)
+	return Base64.getUrlEncoder().withoutPadding().encodeToString(token)
 }
