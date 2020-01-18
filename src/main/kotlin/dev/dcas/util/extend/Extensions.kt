@@ -22,3 +22,8 @@ package dev.dcas.util.extend
  * This is assuming that First = username and Second = password
  */
 fun Pair<Any, Any>.toBasic(): String = "Basic ${"$first:$second".base64Url()}"
+
+/**
+ * Convert a List to kotlin.collections.ArrayList
+ */
+fun <T> List<T>.asArrayList(): ArrayList<T> = ArrayList(this)

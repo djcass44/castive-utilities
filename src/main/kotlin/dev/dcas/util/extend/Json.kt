@@ -18,15 +18,21 @@
 package dev.dcas.util.extend
 
 import com.google.gson.GsonBuilder
+import java.lang.reflect.Type
 
 private val gson = GsonBuilder().setPrettyPrinting().create()
 
 /**
- * Convert an arbitrary object into JSON
+ * Convert an arbitrary object into JSON using GSON
  */
 fun Any.json(): String = gson.toJson(this)
 
 /**
- * Convert a JSON string into a Java class instance
+ * Convert a JSON string into a Java class instance using GSON
  */
-fun <T> String.parse(type: Class<T>): T = gson.fromJson(this, type)
+fun <T> String.parse(classType: Class<T>): T = gson.fromJson(this, classType)
+
+/**
+ * Convert a JSON string into a Java class instance using GSON
+ */
+fun <T> String.parse(type: Type): T = gson.fromJson(this, type)

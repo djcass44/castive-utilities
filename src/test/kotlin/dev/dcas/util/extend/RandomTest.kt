@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Django Cass
+ *    Copyright 2020 Django Cass
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,21 +17,21 @@
 
 package dev.dcas.util.extend
 
-import java.security.SecureRandom
-import kotlin.random.Random
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
-private val random = SecureRandom()
+class RandomTest {
 
-/**
- * Generate a random String that is (this) characters long
- * @throws IllegalArgumentException if (this) is less than or equal to 0
- */
-fun Int.randomString(): String {
-	if(this <= 0)
-		throw IllegalArgumentException("Cannot generate a random String of length <= 0")
-	val string = StringBuilder()
-	for (i in 0 until this) {
-		string.append(Random.nextInt(33, 126).toChar())
+	/**
+	 * Ensures that random output is of the expected length
+	 */
+	@ParameterizedTest
+	@ValueSource(ints = [1, 2, 3, 4, 12, 24, 48])
+	fun `generate a random string of size`(size: Int) {
+		val str = size.randomString()
+		println(str)
+		assertThat(str.length, `is`(size))
 	}
-	return string.toString()
 }

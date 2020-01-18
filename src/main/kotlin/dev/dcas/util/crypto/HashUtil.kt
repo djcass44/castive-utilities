@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Django Cass
+ *    Copyright 2020 Django Cass
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,23 +15,12 @@
  *
  */
 
-package dev.dcas.util.extend
+package dev.dcas.util.crypto
 
-import java.security.SecureRandom
-import kotlin.random.Random
+import com.amdelamar.jhash.Hash
+import com.amdelamar.jhash.algorithms.Type
 
-private val random = SecureRandom()
-
-/**
- * Generate a random String that is (this) characters long
- * @throws IllegalArgumentException if (this) is less than or equal to 0
- */
-fun Int.randomString(): String {
-	if(this <= 0)
-		throw IllegalArgumentException("Cannot generate a random String of length <= 0")
-	val string = StringBuilder()
-	for (i in 0 until this) {
-		string.append(Random.nextInt(33, 126).toChar())
-	}
-	return string.toString()
+object HashUtil {
+	fun getHash(text: String): Hash = Hash.password(text.toCharArray()).algorithm(Type.PBKDF2_SHA256)
+	fun getHash(text: CharArray): Hash = Hash.password(text).algorithm(Type.PBKDF2_SHA256)
 }

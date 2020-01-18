@@ -1,5 +1,5 @@
 /*
- *    Copyright 2019 Django Cass
+ *    Copyright 2020 Django Cass
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,21 +17,26 @@
 
 package dev.dcas.util.extend
 
-import java.security.SecureRandom
-import kotlin.random.Random
+import com.google.gson.reflect.TypeToken
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.Test
 
-private val random = SecureRandom()
+class JsonTest {
 
-/**
- * Generate a random String that is (this) characters long
- * @throws IllegalArgumentException if (this) is less than or equal to 0
- */
-fun Int.randomString(): String {
-	if(this <= 0)
-		throw IllegalArgumentException("Cannot generate a random String of length <= 0")
-	val string = StringBuilder()
-	for (i in 0 until this) {
-		string.append(Random.nextInt(33, 126).toChar())
+	@Test
+	fun `convert primitive object FROM json`() {
+		assertThat("1".parse(Int::class.java), `is`(1))
 	}
-	return string.toString()
+
+	@Test
+	fun `convert complex list FROM json`() {
+		val list = arrayListOf(
+			"test" to 1,
+			"carrot" to 485,
+			"fridge" to 5
+		)
+		val json = list.json()
+		assertThat(json.parse(object : TypeToken<ArrayList<Pair<String, Int>>>() {}.type), `is`(list))
+	}
 }

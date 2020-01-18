@@ -24,10 +24,17 @@ import kotlinx.coroutines.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.concurrent.timer
 
+/**
+ * @param ageLimit: the number of ticks before an item is removed
+ * @param listener: listener fired when an event is removed
+ * @param tickDelay: number of milliseconds between each tick
+ * @param allowReset: if an item is accessed, its age is reset to 0. Disable this if items MUST age off even if they're regularly accessed
+ */
 class TimedCache<K, V>(
 	private val ageLimit: Int = 30,
 	private val listener: TimedCacheListener<K, V>? = null,
-	tickDelay: Long = 10_000L
+	tickDelay: Long = 10_000L,
+	private val allowReset: Boolean = true
 ) {
 	interface TimedCacheListener<K, V> {
 		suspend fun onAgeLimitReached(key: K, value: V)
@@ -38,7 +45,7 @@ class TimedCache<K, V>(
 	operator fun get(key: K): V? {
 		val item = cache[key]
 		// reset the clock when accessed
-		if(item != null)
+		if(item != null && allowReset)
 			set(key, item.second)
 		return item?.second
 	}
@@ -46,6 +53,11 @@ class TimedCache<K, V>(
 	operator fun set(key: K, value: V) {
 		cache[key] = 0 to value
 	}
+
+	/**
+	 * Gets the current size of the cache
+	 */
+	fun size(): Int = cache.size
 
 	init {
 		// start the task
