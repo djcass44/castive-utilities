@@ -19,6 +19,8 @@ package dev.dcas.util.extend
 
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
@@ -43,5 +45,24 @@ class StringTest {
 	])
 	fun `valid strings return false`(text: String?) {
 		assertThat(text.isESNullOrBlank(), `is`(false))
+	}
+
+	@Test
+	fun `ellipsised strings dont throw`() {
+		val text = "this is a test!"
+		assertDoesNotThrow {
+			text.ellipsize(24)
+		}
+	}
+
+	@Test
+	fun `empty strings return nothing`() {
+		assertThat("".ellipsize(0), `is`(""))
+	}
+
+	@Test
+	fun `strings are ellipsised correctly`() {
+		val text = "this is a test!"
+		assertThat(text.ellipsize(12), `is`("this is a te..."))
 	}
 }

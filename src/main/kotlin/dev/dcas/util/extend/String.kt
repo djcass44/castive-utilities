@@ -89,4 +89,8 @@ fun String.decodeBase64Url(): String = String(Base64.getUrlDecoder().decode(this
  */
 fun String.hash(): String = HashUtil.getHash(this).create()
 
-fun String.ellipsize(after: Int = length): String = "${substring(0, after)}..."
+fun String.ellipsize(after: Int = length): String {
+	if(after >= length)
+		return this
+	return "${substring(0, after)}..."
+}
