@@ -23,7 +23,7 @@ plugins {
 }
 
 group = "dev.dcas"
-version = "4"
+version = "5"
 
 repositories {
     mavenCentral()
@@ -40,7 +40,6 @@ dependencies {
 
 	// provides utilities
 	implementation("com.google.code.gson:gson:2.8.6")
-	implementation("com.amdelamar:jhash:2.1.0")
 
 	// test
 	val junitVersion = "5.5.2"
@@ -54,6 +53,10 @@ dependencies {
 }
 
 tasks {
+	withType<Wrapper> {
+		gradleVersion = "6.1"
+		distributionType = Wrapper.DistributionType.ALL
+	}
 	withType<KotlinCompile>().all {
 		kotlinOptions.jvmTarget = "11"
 	}

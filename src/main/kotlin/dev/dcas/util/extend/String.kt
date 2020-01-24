@@ -18,7 +18,6 @@
 package dev.dcas.util.extend
 
 import dev.dcas.util.Environment
-import dev.dcas.util.crypto.HashUtil
 import java.net.URL
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -83,11 +82,6 @@ fun String.decodeBase64(): String = String(Base64.getDecoder().decode(this))
  * URL safe
  */
 fun String.decodeBase64Url(): String = String(Base64.getUrlDecoder().decode(this))
-
-/**
- * Create a hash of a string using PBKDF2 + SHA256
- */
-fun String.hash(): String = HashUtil.getHash(this).create()
 
 fun String.ellipsize(after: Int = length): String {
 	if(after >= length)
