@@ -15,14 +15,18 @@
  *
  */
 
-group = "dev.dcas.utilities"
-version = "5"
+package dev.dcas.util.spring.data
 
-dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+import dev.dcas.util.extend.uuid
+import java.util.*
+import javax.persistence.AttributeConverter
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+class UUIDConverterCompat: AttributeConverter<UUID, String> {
+	override fun convertToDatabaseColumn(attribute: UUID): String {
+		return attribute.toString()
+	}
+
+	override fun convertToEntityAttribute(dbData: String): UUID {
+		return dbData.uuid() ?: error("Cannot convert to UUID: $dbData")
+	}
 }

@@ -1,5 +1,5 @@
 /*
- *    Copyright 2020 Django Cass
+ *    Copyright 2019 Django Cass
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -12,17 +12,11 @@
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
- *
  */
 
-group = "dev.dcas.utilities"
-version = "5"
+package dev.dcas.util.spring.responses
 
-dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+import org.springframework.http.HttpStatus
+import org.springframework.web.server.ResponseStatusException
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
-}
+class InternalErrorResponse(message: String = "Internal server error."): ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message)

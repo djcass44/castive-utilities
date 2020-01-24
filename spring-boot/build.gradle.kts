@@ -15,14 +15,18 @@
  *
  */
 
+plugins {
+	id("org.springframework.boot") version "2.2.4.RELEASE"
+	id("io.spring.dependency-management") version "1.0.8.RELEASE"
+}
+
 group = "dev.dcas.utilities"
 version = "5"
 
 dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+	implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+	implementation(project(":core"))
 }

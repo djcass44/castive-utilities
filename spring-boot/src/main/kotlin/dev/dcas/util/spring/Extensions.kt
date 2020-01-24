@@ -15,14 +15,17 @@
  *
  */
 
-group = "dev.dcas.utilities"
-version = "5"
+package dev.dcas.util.spring
 
-dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.Pageable
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+/**
+ * Converts a Java/Kotlin list into a Spring pageable format
+ */
+fun <T> List<T>.toPage(pageable: Pageable): Page<T> {
+	val start = pageable.offset.toInt()
+	val end = if (start + pageable.pageSize > size) size else start + pageable.pageSize
+	return PageImpl<T>(this.subList(start, end), pageable, size.toLong())
 }

@@ -1,3 +1,4 @@
 rootProject.name = 'utilities'
 include 'core'
+include 'spring-boot'
 

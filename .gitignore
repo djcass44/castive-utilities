@@ -28,6 +28,7 @@ hs_err_pid*
 .gradle
 /build/
 /core/build/
+/spring-boot/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
