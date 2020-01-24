@@ -1,2 +1,3 @@
-rootProject.name = 'castive-utilities'
+rootProject.name = 'utilities'
+include 'core'
 

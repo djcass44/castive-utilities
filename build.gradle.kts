@@ -18,49 +18,49 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.61"
+	kotlin("jvm") version "1.3.61"
 	maven
 }
+
 
 group = "dev.dcas"
 version = "5"
 
-repositories {
-    mavenCentral()
-	jcenter()
-	maven(url = "https://jitpack.io")
+allprojects {
+	repositories {
+		mavenCentral()
+		maven(url = "https://jitpack.io")
+	}
+	tasks {
+		withType<Wrapper> {
+			gradleVersion = "6.1"
+			distributionType = Wrapper.DistributionType.ALL
+		}
+		withType<KotlinCompile>().all {
+			kotlinOptions.jvmTarget = "11"
+		}
+	}
 }
 
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+subprojects {
+	apply(plugin = "org.jetbrains.kotlin.jvm")
+	dependencies {
+		implementation(kotlin("stdlib-jdk8"))
 
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+		// test
+		val junitVersion = "5.5.2"
+		testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+		testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+		testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+		testImplementation("org.jetbrains.kotlin:kotlin-test")
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
-
-	// test
-	val junitVersion = "5.5.2"
-	testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-	testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
-	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
-	testImplementation("org.jetbrains.kotlin:kotlin-test")
-
-	testImplementation("org.hamcrest:hamcrest:2.2")
-	testImplementation("org.mockito:mockito-core:3.2.4")
-}
-
-tasks {
-	withType<Wrapper> {
-		gradleVersion = "6.1"
-		distributionType = Wrapper.DistributionType.ALL
+		testImplementation("org.hamcrest:hamcrest:2.2")
+		testImplementation("org.mockito:mockito-core:3.2.4")
 	}
-	withType<KotlinCompile>().all {
-		kotlinOptions.jvmTarget = "11"
-	}
-	withType<Test> {
-		useJUnitPlatform()
+
+	tasks {
+		withType<Test> {
+			useJUnitPlatform()
+		}
 	}
 }
