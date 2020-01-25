@@ -44,6 +44,7 @@ allprojects {
 
 subprojects {
 	apply(plugin = "org.jetbrains.kotlin.jvm")
+	apply(plugin = "maven")
 	dependencies {
 		implementation(kotlin("stdlib-jdk8"))
 

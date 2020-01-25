@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 /*
  *    Copyright 2020 Django Cass
  *
@@ -29,4 +31,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
 	implementation(project(":core"))
+}
+
+tasks {
+	withType<BootJar> {
+		enabled = false
+	}
+	withType<Jar> {
+		enabled = true
+	}
 }
