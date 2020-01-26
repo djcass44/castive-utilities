@@ -23,7 +23,8 @@ plugins {
 }
 
 group = "dev.dcas.utilities"
-version = "5"
+val projectVersion: String by project
+version = projectVersion
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")

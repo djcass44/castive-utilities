@@ -15,15 +15,12 @@
  *
  */
 
-group = "dev.dcas.utilities"
-val projectVersion: String by project
-version = projectVersion
+package dev.dcas.util.crypto.jdk
 
-dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+import javax.crypto.KeyGenerator
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+abstract class AbstractJavaCryptoProvider {
+	internal val generator: KeyGenerator = KeyGenerator.getInstance("AES").apply {
+		init(256)
+	}
 }

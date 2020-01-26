@@ -15,15 +15,28 @@
  *
  */
 
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+plugins {
+	id("org.springframework.boot") version "2.2.4.RELEASE"
+	id("io.spring.dependency-management") version "1.0.8.RELEASE"
+}
+
 group = "dev.dcas.utilities"
 val projectVersion: String by project
 version = projectVersion
 
 dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
+	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("com.github.djcass44:log2:4.1")
+	implementation(project(":core"))
+}
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+tasks {
+	withType<BootJar> {
+		enabled = false
+	}
+	withType<Jar> {
+		enabled = true
+	}
 }
