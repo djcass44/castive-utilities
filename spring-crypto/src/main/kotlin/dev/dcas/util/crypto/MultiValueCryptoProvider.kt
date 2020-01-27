@@ -18,4 +18,5 @@
 package dev.dcas.util.crypto
 
 interface MultiValueCryptoProvider {
+	fun get(): String
 }

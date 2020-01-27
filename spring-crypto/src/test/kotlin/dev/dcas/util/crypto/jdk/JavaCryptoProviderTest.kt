@@ -17,13 +17,23 @@
 
 package dev.dcas.util.crypto.jdk
 
-import dev.dcas.util.crypto.MultiValueCryptoProvider
-import dev.dcas.util.extend.base64Url
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
-import org.springframework.stereotype.Component
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.not
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.RepeatedTest
+import org.junit.jupiter.api.Test
 
-@ConditionalOnMissingBean(MultiValueCryptoProvider::class)
-@Component
-class JavaMultiValueCrypto: AbstractJavaCryptoProvider(), MultiValueCryptoProvider {
-	override fun get(): String = generator.generateKey().encoded.base64Url()
+class JavaCryptoProviderTest {
+
+	@Test
+	fun `onevalue always returns same value`() {
+		val provider = JavaOneValueCrypto()
+		assertThat(provider.get(), `is`(provider.get()))
+	}
+
+	@RepeatedTest(100)
+	fun `multivalue always returns different value`() {
+		val provider = JavaMultiValueCrypto()
+		assertThat(provider.get(), not(provider.get()))
+	}
 }
