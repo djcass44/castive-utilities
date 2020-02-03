@@ -30,6 +30,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("com.github.djcass44:log2:4.1")
 	implementation(project(":core"))
+
+	// aws parameter store crypto provider
+	implementation("com.amazonaws:aws-java-sdk-ssm:1.11.708")
 }
 
 tasks {
