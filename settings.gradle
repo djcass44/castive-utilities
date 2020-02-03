@@ -1,4 +1,5 @@
 rootProject.name = 'utilities'
 include 'core'
 include 'spring-boot'
+include 'spring-crypto'
 

@@ -15,15 +15,25 @@
  *
  */
 
-group = "dev.dcas.utilities"
-val projectVersion: String by project
-version = projectVersion
+package dev.dcas.util.crypto.jdk
 
-dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.not
+import org.hamcrest.MatcherAssert.assertThat
+import org.junit.jupiter.api.RepeatedTest
+import org.junit.jupiter.api.Test
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+class JavaCryptoProviderTest {
+
+	@Test
+	fun `onevalue always returns same value`() {
+		val provider = JavaOneValueCrypto()
+		assertThat(provider.get(), `is`(provider.get()))
+	}
+
+	@RepeatedTest(100)
+	fun `multivalue always returns different value`() {
+		val provider = JavaMultiValueCrypto()
+		assertThat(provider.get(), not(provider.get()))
+	}
 }

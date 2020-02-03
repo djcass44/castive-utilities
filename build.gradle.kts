@@ -24,7 +24,8 @@ plugins {
 
 
 group = "dev.dcas"
-version = "5"
+val projectVersion: String by project
+version = projectVersion
 
 allprojects {
 	repositories {
@@ -53,7 +54,7 @@ subprojects {
 		testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
 		testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
 		testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
-		testImplementation("org.jetbrains.kotlin:kotlin-test")
+		testImplementation("org.jetbrains.kotlin:kotlin-test:1.3.61")
 
 		testImplementation("org.hamcrest:hamcrest:2.2")
 		testImplementation("org.mockito:mockito-core:3.2.4")

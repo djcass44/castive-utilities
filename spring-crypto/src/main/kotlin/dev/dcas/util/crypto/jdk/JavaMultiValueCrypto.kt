@@ -15,15 +15,15 @@
  *
  */
 
-group = "dev.dcas.utilities"
-val projectVersion: String by project
-version = projectVersion
+package dev.dcas.util.crypto.jdk
 
-dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
-	// assists library
-	implementation("com.github.djcass44:log2:4.1")
+import dev.dcas.util.crypto.MultiValueCryptoProvider
+import dev.dcas.util.extend.base64Url
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
+import org.springframework.stereotype.Component
 
-	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+@ConditionalOnMissingBean(MultiValueCryptoProvider::class)
+@Component
+class JavaMultiValueCrypto: AbstractJavaCryptoProvider(), MultiValueCryptoProvider {
+	override fun get(): String = generator.generateKey().encoded.base64Url()
 }
