@@ -40,6 +40,9 @@ allprojects {
 		withType<KotlinCompile>().all {
 			kotlinOptions.jvmTarget = "11"
 		}
+		withType<Test> {
+			useJUnitPlatform()
+		}
 	}
 }
 
@@ -58,11 +61,5 @@ subprojects {
 
 		testImplementation("org.hamcrest:hamcrest:2.2")
 		testImplementation("org.mockito:mockito-core:3.2.4")
-	}
-
-	tasks {
-		withType<Test> {
-			useJUnitPlatform()
-		}
 	}
 }

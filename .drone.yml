@@ -1,0 +1,9 @@
+kind: pipeline
+type: kubernetes
+name: test
+
+steps:
+  - name: test
+    image: gradle:jdk11
+    commands:
+      - gradle test
