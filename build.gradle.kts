@@ -29,6 +29,7 @@ version = projectVersion
 
 allprojects {
 	repositories {
+		maven(url = "https://mvn.v2.dcas.dev")
 		mavenCentral()
 		maven(url = "https://jitpack.io")
 	}
