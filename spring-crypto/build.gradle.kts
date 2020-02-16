@@ -19,7 +19,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
 	id("org.springframework.boot") version "2.2.4.RELEASE"
-	id("io.spring.dependency-management") version "1.0.8.RELEASE"
+	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 }
 
 group = "dev.dcas.utilities"

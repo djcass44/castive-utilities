@@ -20,10 +20,15 @@ val projectVersion: String by project
 version = projectVersion
 
 dependencies {
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3+")
 	// assists library
 	implementation("com.github.djcass44:log2:4.1")
 
 	// provides utilities
-	implementation("com.google.code.gson:gson:2.8.6")
+	implementation("com.google.code.gson:gson:2.8+")
+
+	val junitVersion = "5.6.0"
+	testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+	testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
