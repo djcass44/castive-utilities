@@ -49,6 +49,7 @@ subprojects {
 	apply(plugin = "maven")
 	dependencies {
 		implementation(kotlin("stdlib-jdk8"))
+		implementation(kotlin("reflect"))
 
 		// test
 		testImplementation("org.junit.jupiter:junit-jupiter-api")

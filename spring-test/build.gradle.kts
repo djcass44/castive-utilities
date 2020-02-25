@@ -29,22 +29,14 @@ version = projectVersion
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-	implementation(project(":core"))
-
-	testImplementation(project(":spring-test"))
-	testImplementation("org.springframework.boot:spring-boot-starter-test") {
+	implementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 
 	// rest assured
-	val restAssuredVersion = "4.2.0"
-	testImplementation("io.rest-assured:json-path:$restAssuredVersion")
-	testImplementation("io.rest-assured:xml-path:$restAssuredVersion")
-	testImplementation("io.rest-assured:rest-assured:$restAssuredVersion")
-	testImplementation("io.rest-assured:kotlin-extensions:$restAssuredVersion")
-	testImplementation("io.rest-assured:spring-mock-mvc:$restAssuredVersion")
+	implementation("io.rest-assured:rest-assured:4.2.0")
+
 }
 
 tasks {

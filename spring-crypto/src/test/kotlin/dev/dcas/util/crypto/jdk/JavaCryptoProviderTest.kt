@@ -17,8 +17,7 @@
 
 package dev.dcas.util.crypto.jdk
 
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.not
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.RepeatedTest
 import org.junit.jupiter.api.Test
@@ -35,5 +34,15 @@ class JavaCryptoProviderTest {
 	fun `multivalue always returns different value`() {
 		val provider = JavaMultiValueCrypto()
 		assertThat(provider.get(), not(provider.get()))
+	}
+
+	private val values = arrayListOf<String>()
+	private val crypt = JavaMultiValueCrypto()
+
+	@RepeatedTest(1000)
+	fun `values dont collide`() {
+		val value = crypt.get()
+		assertThat(values.contains(value), equalTo(false))
+		values.add(value)
 	}
 }
