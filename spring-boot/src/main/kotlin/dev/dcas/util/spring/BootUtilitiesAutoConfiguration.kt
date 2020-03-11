@@ -17,15 +17,7 @@
 
 package dev.dcas.util.spring
 
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
-import org.springframework.data.domain.Pageable
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage
 
-/**
- * Converts a Java/Kotlin list into a Spring pageable format
- */
-fun <T> List<T>.toPage(pageable: Pageable): Page<T> {
-	val start = pageable.offset.toInt()
-	val end = if (start + pageable.pageSize > size) size else start + pageable.pageSize
-	return PageImpl(this.subList(start, end), pageable, size.toLong())
-}
+@AutoConfigurationPackage
+class BootUtilitiesAutoConfiguration

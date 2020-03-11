@@ -18,7 +18,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.3.61"
+	kotlin("jvm") version "1.3.70"
 	maven
 }
 
@@ -55,7 +55,7 @@ subprojects {
 		testImplementation("org.junit.jupiter:junit-jupiter-api")
 		testImplementation("org.junit.jupiter:junit-jupiter-params")
 		testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-		testImplementation("org.jetbrains.kotlin:kotlin-test:1.3.61")
+		testImplementation("org.jetbrains.kotlin:kotlin-test:1.3.70")
 
 		testImplementation("org.hamcrest:hamcrest:2.2")
 		testImplementation("org.mockito:mockito-core:3.2.4")

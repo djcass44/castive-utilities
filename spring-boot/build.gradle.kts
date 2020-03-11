@@ -18,7 +18,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
  */
 
 plugins {
-	id("org.springframework.boot") version "2.2.4.RELEASE"
+	id("org.springframework.boot") version "2.2.5.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 }
 
@@ -30,6 +30,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+	// swagger
+	implementation("io.springfox:springfox-swagger2:2.9.2")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+
 
 	implementation(project(":core"))
 

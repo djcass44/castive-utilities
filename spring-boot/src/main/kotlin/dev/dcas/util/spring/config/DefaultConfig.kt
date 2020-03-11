@@ -15,17 +15,21 @@
  *
  */
 
-package dev.dcas.util.spring
+package dev.dcas.util.spring.config
 
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
-import org.springframework.data.domain.Pageable
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
+import org.springframework.context.annotation.Bean
+import org.springframework.stereotype.Component
 
-/**
- * Converts a Java/Kotlin list into a Spring pageable format
- */
-fun <T> List<T>.toPage(pageable: Pageable): Page<T> {
-	val start = pageable.offset.toInt()
-	val end = if (start + pageable.pageSize > size) size else start + pageable.pageSize
-	return PageImpl(this.subList(start, end), pageable, size.toLong())
+@Component
+class DefaultConfig {
+
+	/**
+	 * Creates a default implementation of the Jackson ObjectMapper
+	 */
+	@ConditionalOnMissingBean
+	@Bean
+	fun objectMapper(): ObjectMapper = jacksonObjectMapper()
 }
